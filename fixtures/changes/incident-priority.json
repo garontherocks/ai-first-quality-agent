@@ -1,0 +1,5 @@
+{
+  "title": "Add critical incident priority",
+  "description": "Allow operators to create incidents with a critical priority.",
+  "files": ["src/domain/incident.ts", "src/app.ts"]
+}
