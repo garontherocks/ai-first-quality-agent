@@ -39,6 +39,8 @@ CI needs stable results. The deterministic provider lets us test orchestration, 
 
 `src/evals` measures schema compliance, risk accuracy and expected test selection against controlled fixtures. CI evaluates the mock provider so failures are attributable and free. This is a baseline, not evidence that a live model is universally correct.
 
+The adversarial suite adds explicit attacks and safety regressions: embedded instructions, missing or forged approval, malformed provider output, incorrect test selection and secret leakage. Its JSON report is uploaded by CI as evidence. Because CI uses deterministic components, cost is zero and latency is diagnostic rather than representative of a live model.
+
 ## Tool boundary
 
 `ToolRegistry` validates both sides of each invocation. `list_tests` searches only the repository's fixed `tests/unit` and `tests/api` directories, skips symbolic links and never executes a test. `inspect_change` accepts the same validated change contract used by the agent. `execute_tests` accepts only `unit` or `api`, then maps that enum to a fixed npm script after approval.
@@ -49,4 +51,4 @@ Hooks observe validated calls before and after execution and receive normalized 
 
 ## Next architectural increment
 
-The next phase expands evaluations with adversarial cases for injection resistance, approval bypass, schema drift and tool-selection behavior.
+The next phase publishes versioned evaluation evidence to the existing SDET portfolio without making that repository depend on model credentials.
