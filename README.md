@@ -21,7 +21,7 @@ The project is deliberately **mock-first and review-only**. A live OpenAI provid
 ## Quick start
 
 ```bash
-npm ci
+npm install
 npm run lint
 npm run typecheck
 npm run test
