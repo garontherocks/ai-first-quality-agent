@@ -20,7 +20,7 @@ Trace a denied and an approved `execute_tests` call. Study why approval is check
 
 ## Phase 5 — Evaluations
 
-Measure schema compliance, risk classification, tool selection, prompt-injection resistance, cost and latency. CI remains mock-first; live-provider evaluations run separately.
+Run both evaluation commands, inspect the per-case evidence and deliberately break one expectation. Distinguish deterministic safety regression gates from live-model quality experiments. CI records pass rates, category rates, latency and zero mock cost without requiring credentials.
 
 ## Phase 6 — Portfolio integration
 
