@@ -12,6 +12,7 @@ export function createInspectChangeTool(): ToolDefinition {
   return {
     name: 'inspect_change',
     description: 'Inspect validated change metadata and suggest existing tests without changing files.',
+    effect: 'read',
     inputSchema: changeInputSchema,
     outputSchema,
     async execute(input) {

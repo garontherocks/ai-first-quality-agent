@@ -16,6 +16,8 @@ The project is deliberately **mock-first and review-only**. A live OpenAI provid
 - Mandatory human-approval flag
 - Deterministic baseline evaluations
 - Schema-validated read-only tool registry and MCP server
+- Lifecycle hooks, redacted telemetry and normalized tool errors
+- Server-validated human approval for allowlisted test execution
 - Unit, API, lint, type, demo and evaluation gates in CI
 - Architecture, glossary, ADR and hands-on exercises
 
@@ -69,12 +71,12 @@ AI-first does not mean replacing every test with an LLM call. It means designing
 - [x] Phase 2 foundation: provider contract, mock provider and review-only plan
 - [x] Phase 2 completion: prompt package, optional live provider and baseline evals
 - [x] Phase 3: tested read-only tool registry and MCP server
-- [ ] Phase 4: lifecycle hooks, redaction and approval policy
+- [x] Phase 4: lifecycle hooks, redaction, telemetry and approval policy
 - [ ] Phase 5: adversarial and behavioral evaluation harness
 - [ ] Phase 6: evidence integration with `sdet-portfolio`
 
-Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), the [Phase 2](docs/PHASE_2.md) and [Phase 3](docs/PHASE_3.md) guides, and the ADRs.
+Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), the phase guides for [Phase 2](docs/PHASE_2.md), [Phase 3](docs/PHASE_3.md) and [Phase 4](docs/PHASE_4.md), and the ADRs.
 
 ## Safety
 
-The current agent cannot run arbitrary commands, edit files or post to GitHub. MCP currently exposes only two closed-world, read-only tools. Live access is opt-in, secrets stay outside source control, model and tool output is schema-validated, and generated plans remain approval-gated.
+The agent cannot run arbitrary commands, edit files or post to GitHub. Its only execution tool maps a fixed suite enum to fixed npm argument arrays, uses no shell, and requires a server-side approval token. Secrets stay outside source control and telemetry, while model and tool output remains schema-validated.

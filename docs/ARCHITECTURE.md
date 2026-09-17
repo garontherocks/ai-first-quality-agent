@@ -14,6 +14,8 @@ flowchart TD
   Client[MCP client] --> MCP[MCP adapter]
   MCP --> Registry[Tool registry]
   Registry --> ReadOnly[Read-only tools]
+  Registry --> Policy[Approval policy]
+  Policy --> Execute[Allowlisted test runner]
 ```
 
 ## Trust boundaries
@@ -26,6 +28,8 @@ flowchart TD
 - Human approval is part of the output contract, not a convention.
 - MCP is only a transport adapter; direct tests cover the registry before protocol exposure.
 - Tools have fixed names and schemas. Callers cannot supply paths or commands.
+- Side-effecting calls require evidence matching a server-side approval token.
+- Process execution uses fixed argument arrays with `shell: false` and a timeout.
 
 ## Why mock-first?
 
@@ -37,8 +41,12 @@ CI needs stable results. The deterministic provider lets us test orchestration, 
 
 ## Tool boundary
 
-`ToolRegistry` validates both sides of each invocation. `list_tests` searches only the repository's fixed `tests/unit` and `tests/api` directories, skips symbolic links and never executes a test. `inspect_change` accepts the same validated change contract used by the agent. MCP advertises both as read-only, idempotent, non-destructive and closed-world.
+`ToolRegistry` validates both sides of each invocation. `list_tests` searches only the repository's fixed `tests/unit` and `tests/api` directories, skips symbolic links and never executes a test. `inspect_change` accepts the same validated change contract used by the agent. `execute_tests` accepts only `unit` or `api`, then maps that enum to a fixed npm script after approval.
+
+## Lifecycle boundary
+
+Hooks observe validated calls before and after execution and receive normalized errors. Telemetry redacts sensitive keys and bearer tokens. Approval happens before the `before` hook and before the runner, so denied calls cannot reach side effects. Errors expose a stable code and safe message instead of raw provider, validation or process details.
 
 ## Next architectural increment
 
-The next phase adds lifecycle hooks, redaction, telemetry and an approval policy. Test execution remains deliberately absent until that policy can gate side effects.
+The next phase expands evaluations with adversarial cases for injection resistance, approval bypass, schema drift and tool-selection behavior.
