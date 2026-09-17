@@ -19,6 +19,7 @@ The project is deliberately **mock-first and review-only**. A live OpenAI provid
 - Lifecycle hooks, redacted telemetry and normalized tool errors
 - Server-validated human approval for allowlisted test execution
 - Adversarial evaluation gate with downloadable CI evidence
+- Versioned v1 evidence contract for portfolio consumers
 - Unit, API, lint, type, demo and evaluation gates in CI
 - Architecture, glossary, ADR and hands-on exercises
 
@@ -33,6 +34,7 @@ npm run test
 npm run agent:demo
 npm run eval
 npm run eval:adversarial
+npm run evidence:verify
 npm run mcp:start
 ```
 
@@ -75,9 +77,11 @@ AI-first does not mean replacing every test with an LLM call. It means designing
 - [x] Phase 3: tested read-only tool registry and MCP server
 - [x] Phase 4: lifecycle hooks, redaction, telemetry and approval policy
 - [x] Phase 5: adversarial and behavioral evaluation harness
-- [ ] Phase 6: evidence integration with `sdet-portfolio`
+- [x] Phase 6: versioned evidence integration with `sdet-portfolio`
 
-Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), the guides for [Phase 2](docs/PHASE_2.md), [Phase 3](docs/PHASE_3.md), [Phase 4](docs/PHASE_4.md) and [Phase 5](docs/PHASE_5.md), and the ADRs.
+**Version 1 is complete.** Future work should start a new roadmap rather than silently expanding the v1 safety claims.
+
+Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), the phase guides and ADRs. [Phase 6](docs/PHASE_6.md) explains the cross-repository evidence contract and v1 release boundary.
 
 ## Safety
 

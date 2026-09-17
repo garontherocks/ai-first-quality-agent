@@ -27,9 +27,12 @@ jobs:
       - run: npm run agent:demo
       - run: npm run eval
       - run: npm run eval:adversarial
+      - run: npm run evidence:verify
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: adversarial-evaluation-report
-          path: reports/adversarial-evals.json
+          name: quality-evidence-v1
+          path: |
+            evidence/v1/contract.json
+            reports/adversarial-evals.json
           if-no-files-found: error
