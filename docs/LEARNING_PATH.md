@@ -12,7 +12,7 @@ Study the boundary between untrusted model output and trusted application data. 
 
 ## Phase 3 — Tools and MCP
 
-Add read-only tools for listing tests, inspecting a change and executing an approved Playwright selection. Expose those tools through an MCP server.
+Study the transport-independent registry, then the MCP adapter. The current tools list allowlisted tests and inspect validated change metadata. Test execution is deferred until Phase 4 can require explicit approval and record the side effect.
 
 ## Phase 4 — Hooks and safety
 

@@ -11,6 +11,9 @@ flowchart TD
   Mock --> Schema[Zod validation]
   Live --> Schema
   Schema --> Plan[Review-only plan]
+  Client[MCP client] --> MCP[MCP adapter]
+  MCP --> Registry[Tool registry]
+  Registry --> ReadOnly[Read-only tools]
 ```
 
 ## Trust boundaries
@@ -21,6 +24,8 @@ flowchart TD
 - Change context is placed in a data block and explicitly treated as untrusted.
 - The agent cannot write code, execute arbitrary commands or publish comments.
 - Human approval is part of the output contract, not a convention.
+- MCP is only a transport adapter; direct tests cover the registry before protocol exposure.
+- Tools have fixed names and schemas. Callers cannot supply paths or commands.
 
 ## Why mock-first?
 
@@ -30,6 +35,10 @@ CI needs stable results. The deterministic provider lets us test orchestration, 
 
 `src/evals` measures schema compliance, risk accuracy and expected test selection against controlled fixtures. CI evaluates the mock provider so failures are attributable and free. This is a baseline, not evidence that a live model is universally correct.
 
+## Tool boundary
+
+`ToolRegistry` validates both sides of each invocation. `list_tests` searches only the repository's fixed `tests/unit` and `tests/api` directories, skips symbolic links and never executes a test. `inspect_change` accepts the same validated change contract used by the agent. MCP advertises both as read-only, idempotent, non-destructive and closed-world.
+
 ## Next architectural increment
 
-The next phase adds a tool registry and read-only execution policy. MCP is introduced only after the underlying tools have direct automated tests.
+The next phase adds lifecycle hooks, redaction, telemetry and an approval policy. Test execution remains deliberately absent until that policy can gate side effects.
