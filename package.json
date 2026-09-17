@@ -12,7 +12,8 @@
     "test": "npm run test:unit && npm run test:api",
     "test:unit": "vitest run",
     "test:api": "playwright test",
-    "agent:demo": "node --import tsx src/agent/cli.ts fixtures/changes/incident-priority.json"
+    "agent:demo": "node --import tsx src/agent/cli.ts fixtures/changes/incident-priority.json",
+    "eval": "node --import tsx src/evals/cli.ts fixtures/evals/quality-plans.json"
   },
   "dependencies": {
     "express": "5.1.0",

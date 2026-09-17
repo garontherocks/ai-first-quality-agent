@@ -24,3 +24,4 @@ jobs:
       - run: npm run test:unit
       - run: npm run test:api
       - run: npm run agent:demo
+      - run: npm run eval
