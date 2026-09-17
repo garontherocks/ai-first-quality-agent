@@ -15,6 +15,7 @@ The project is deliberately **mock-first and review-only**. A live OpenAI provid
 - Schema validation for every proposed plan
 - Mandatory human-approval flag
 - Deterministic baseline evaluations
+- Schema-validated read-only tool registry and MCP server
 - Unit, API, lint, type, demo and evaluation gates in CI
 - Architecture, glossary, ADR and hands-on exercises
 
@@ -28,6 +29,7 @@ npm run typecheck
 npm run test
 npm run agent:demo
 npm run eval
+npm run mcp:start
 ```
 
 The demo analyses `fixtures/changes/incident-priority.json` and produces a review-only quality plan. It uses the deterministic provider unless you explicitly select another provider.
@@ -49,6 +51,8 @@ The repository never needs this key in CI. Provider output is still untrusted un
 src/domain/       deterministic product model
 src/agent/        provider contract and orchestration
 src/evals/        deterministic evaluation runner
+src/tools/        transport-independent read-only tools
+src/mcp/          MCP adapter and stdio entry point
 tests/api/        Playwright API tests
 tests/unit/       deterministic agent tests
 fixtures/         controlled agent and evaluation inputs
@@ -64,13 +68,13 @@ AI-first does not mean replacing every test with an LLM call. It means designing
 - [x] Phase 1: deterministic incident API and Playwright coverage
 - [x] Phase 2 foundation: provider contract, mock provider and review-only plan
 - [x] Phase 2 completion: prompt package, optional live provider and baseline evals
-- [ ] Phase 3: tested tool registry and MCP server
+- [x] Phase 3: tested read-only tool registry and MCP server
 - [ ] Phase 4: lifecycle hooks, redaction and approval policy
 - [ ] Phase 5: adversarial and behavioral evaluation harness
 - [ ] Phase 6: evidence integration with `sdet-portfolio`
 
-Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), [the Phase 2 guide](docs/PHASE_2.md) and the ADRs.
+Start with [the learning path](docs/LEARNING_PATH.md), then read [the architecture](docs/ARCHITECTURE.md), the [Phase 2](docs/PHASE_2.md) and [Phase 3](docs/PHASE_3.md) guides, and the ADRs.
 
 ## Safety
 
-The current agent cannot run arbitrary commands, edit files or post to GitHub. Live access is opt-in, secrets stay outside source control, model output is schema-validated, and generated plans remain approval-gated.
+The current agent cannot run arbitrary commands, edit files or post to GitHub. MCP currently exposes only two closed-world, read-only tools. Live access is opt-in, secrets stay outside source control, model and tool output is schema-validated, and generated plans remain approval-gated.
