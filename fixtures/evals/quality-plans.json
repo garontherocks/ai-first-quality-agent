@@ -1,0 +1,20 @@
+[
+  {
+    "id": "priority-change",
+    "input": {
+      "title": "Change incident priority",
+      "description": "Add critical priority",
+      "files": ["src/domain/incident.ts"]
+    },
+    "expected": { "risk": "high", "testIds": ["API-INC-001", "API-INC-002"] }
+  },
+  {
+    "id": "ordinary-api-change",
+    "input": {
+      "title": "Improve incident response",
+      "description": "Return a clearer creation response",
+      "files": ["src/app.ts"]
+    },
+    "expected": { "risk": "medium", "testIds": ["API-INC-001"] }
+  }
+]

@@ -6,9 +6,9 @@ This repository is intentionally incremental. Do not jump directly to the live-m
 
 Learn how the incident API, schemas, test data and Playwright API tests work. Run every command manually and explain why each assertion exists.
 
-## Phase 2 — Agent contracts
+## Phase 2 — Agent contracts and provider boundary
 
-Study the boundary between untrusted model output and trusted application data. The mock provider behaves like a model but remains deterministic. Change a fixture, predict the plan, and then run the demo.
+Study the boundary between untrusted model output and trusted application data. Compare the deterministic and OpenAI providers: both implement the same interface and neither can bypass the orchestrator's schema. Inspect the versioned prompt, run the baseline evaluation, and only then try an optional live call.
 
 ## Phase 3 — Tools and MCP
 
@@ -33,3 +33,6 @@ Publish evaluation summaries and CI evidence to the existing SDET portfolio with
 3. Break the provider schema and observe the validation failure.
 4. Add a valid `resolved` transition using test-first development.
 5. Explain why every generated plan requires human approval.
+6. Run `npm run eval` and explain each metric.
+7. Stub a provider response that is valid JSON but violates the plan schema.
+8. Change the prompt version and describe which evaluation evidence you would compare.
