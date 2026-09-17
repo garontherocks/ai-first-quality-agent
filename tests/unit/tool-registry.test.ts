@@ -6,7 +6,7 @@ describe('ToolRegistry', () => {
   it('validates tool input and output', async () => {
     const registry = new ToolRegistry()
     registry.register({
-      name: 'echo', description: 'Validated echo',
+      name: 'echo', description: 'Validated echo', effect: 'read',
       inputSchema: z.object({ value: z.string() }),
       outputSchema: z.object({ value: z.string() }),
       async execute(input) { return input },
@@ -18,7 +18,7 @@ describe('ToolRegistry', () => {
   it('fails closed for unknown and duplicate tools', async () => {
     const registry = new ToolRegistry()
     const tool = {
-      name: 'known', description: 'Known tool', inputSchema: z.object({}),
+      name: 'known', description: 'Known tool', effect: 'read' as const, inputSchema: z.object({}),
       outputSchema: z.object({ ok: z.boolean() }), async execute() { return { ok: true } },
     }
     registry.register(tool)

@@ -16,7 +16,7 @@ Study the transport-independent registry, then the MCP adapter. The current tool
 
 ## Phase 4 — Hooks and safety
 
-Add hooks before and after model/tool calls for validation, redaction, approval, telemetry and error normalization.
+Trace a denied and an approved `execute_tests` call. Study why approval is checked against server configuration, why commands are represented as argument arrays, and why telemetry receives redacted data and stable error codes.
 
 ## Phase 5 — Evaluations
 

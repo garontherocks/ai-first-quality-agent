@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createDefaultToolRegistry } from '../../src/tools/default-registry.js'
 
 describe('read-only quality tools', () => {
-  const registry = createDefaultToolRegistry(process.cwd())
+  const registry = createDefaultToolRegistry({ root: process.cwd() })
 
   it('lists only tests from the selected allowlisted suite', async () => {
     const result = await registry.call('list_tests', { suite: 'api' })

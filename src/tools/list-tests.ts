@@ -24,6 +24,7 @@ export function createListTestsTool(root: string): ToolDefinition {
   return {
     name: 'list_tests',
     description: 'List allowlisted unit and API test files without executing them.',
+    effect: 'read',
     inputSchema,
     outputSchema,
     async execute(input) {
