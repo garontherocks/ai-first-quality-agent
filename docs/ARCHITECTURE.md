@@ -49,6 +49,8 @@ The adversarial suite adds explicit attacks and safety regressions: embedded ins
 
 Hooks observe validated calls before and after execution and receive normalized errors. Telemetry redacts sensitive keys and bearer tokens. Approval happens before the `before` hook and before the runner, so denied calls cannot reach side effects. Errors expose a stable code and safe message instead of raw provider, validation or process details.
 
-## Next architectural increment
+## Evidence boundary
 
-The next phase publishes versioned evaluation evidence to the existing SDET portfolio without making that repository depend on model credentials.
+`evidence/v1/contract.json` is the stable, reviewable interface between this repository and the SDET portfolio. CI verifies the generated adversarial report against that contract and uploads both files as the `quality-evidence-v1` artifact. Consumers keep a reviewed snapshot of the contract, so they can validate the claims without credentials, a paid model or cross-repository write access.
+
+The contract records the source workflow, report version, deterministic provider, required adversarial categories, minimum pass rates, zero-cost expectation and safety claims. Changing those guarantees requires a deliberate contract update and review.

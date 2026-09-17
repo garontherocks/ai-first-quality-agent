@@ -24,7 +24,7 @@ Run both evaluation commands, inspect the per-case evidence and deliberately bre
 
 ## Phase 6 — Portfolio integration
 
-Publish evaluation summaries and CI evidence to the existing SDET portfolio without making the portfolio depend on a paid model.
+Study `evidence/v1/contract.json`, generate the adversarial report and run `npm run evidence:verify`. Compare the producer contract with the reviewed snapshot in the SDET portfolio. Notice that CI publishes evidence while the consumer validates claims independently, without a paid model, shared secret or cross-repository write token.
 
 ## Exercises for this iteration
 
@@ -36,3 +36,5 @@ Publish evaluation summaries and CI evidence to the existing SDET portfolio with
 6. Run `npm run eval` and explain each metric.
 7. Stub a provider response that is valid JSON but violates the plan schema.
 8. Change the prompt version and describe which evaluation evidence you would compare.
+9. Lower one category pass rate in the report and explain why the evidence verifier rejects it.
+10. Change the evidence contract version and list the consumer changes required before release.

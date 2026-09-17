@@ -11,7 +11,7 @@ Unit tests show that individual components follow their contracts. Evaluations a
 | `npm run eval` | Baseline risk and test recommendation accuracy | Deterministic mock |
 | `npm run eval:adversarial` | Security and behavioral regression gate | Deterministic components |
 
-The adversarial command writes `reports/adversarial-evals.json`. CI uploads it as `adversarial-evaluation-report`, even when the gate fails.
+The adversarial command writes `reports/adversarial-evals.json`. Phase 6 verifies it against the release contract, then CI uploads both files as `quality-evidence-v1`, even when the gate fails.
 
 ## Covered categories
 
