@@ -22,7 +22,7 @@
     "mcp:start": "node --import tsx src/mcp/stdio.ts"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.30.0",
+    "@modelcontextprotocol/sdk": "1.32.0",
     "express": "5.1.0",
     "zod": "4.1.5"
   },
