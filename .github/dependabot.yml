@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      # One monthly PR for every compatible (minor/patch) update.
+      # Major updates arrive as individual PRs so breaking changes get reviewed.
+      npm-minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: quarterly
+    groups:
+      github-actions:
+        patterns:
+          - '*'
